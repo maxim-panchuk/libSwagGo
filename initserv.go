@@ -2,6 +2,7 @@ package libSwagGo
 
 import (
 	routing "github.com/qiangxue/fasthttp-routing"
+	httpSwagger "github.com/swaggo/http-swagger"
 	"github.com/valyala/fasthttp"
 )
 
@@ -29,4 +30,8 @@ func AddRoute(method HttpMethod, path string, handler routing.Handler) {
 
 func InitServer() {
 	panic(fasthttp.ListenAndServe(":8080", router.HandleRequest))
+}
+
+func InitSwagger(path string) {
+	addRoute(GET, path, NewFastHTTPHandler(httpSwagger.Handler()))
 }
